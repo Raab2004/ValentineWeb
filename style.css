@@ -1,0 +1,118 @@
+body {
+    background-color: #ffe6e6; /* Un rosa suave de fondo */
+    font-family: 'Arial', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Altura completa de la ventana */
+    margin: 0;
+    text-align: center;
+    overflow: hidden; /* Evita barras de desplazamiento si el botón se va muy lejos */
+}
+
+h1 {
+    color: #ff4d4d;
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+button {
+    font-size: 1.5rem;
+    padding: 10px 30px;
+    margin: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+#btnSi {
+    background-color: #4CAF50; /* Verde */
+    color: white;
+    font-weight: bold;
+    /* Hacemos el botón SI un poco más grande por defecto */
+    transform: scale(1.2); 
+}
+
+#btnNo {
+    background-color: #f44336;
+    color: white;
+    position: fixed; 
+    z-index: 1000;
+    transition: all 0.3s ease; /* Suaviza el movimiento */
+}
+
+/* --- Nuevos estilos para la V2 --- */
+
+/* Aseguramos que el contenido principal esté por encima de los gatos */
+.principal {
+    position: relative;
+    z-index: 10; /* Un número mayor significa "más arriba" en la capa */
+}
+
+/* Estilo para las imágenes de gatos que aparecerán */
+.gato-triste {
+    position: absolute;
+    width: 200px;
+    height: auto;
+    
+    /* CAMBIO CLAVE 1: Z-Index supremo */
+    /* Antes era 1, ahora es 2000 para ganarles a los botones (que tienen 1000) */
+    z-index: 2000; 
+    
+    /* CAMBIO CLAVE 2: Modo Fantasma */
+    /* Esto es vital. Permite que puedas dar click en los botones 
+       aunque tengan un gato encima. El click "atraviesa" la imagen. */
+    pointer-events: none; 
+    
+    opacity: 0.9; /* Les subí un poco la opacidad para que se vean más nítidos */
+    transition: opacity 0.5s ease-out;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* Sombra más dramática */
+}
+
+/* Una clase para el final feliz */
+.fondo-celebracion {
+    background-color: #ffcdd2; /* Un rosa más intenso */
+    background-image: url('https://i.pinimg.com/originals/c3/e0/c2/c3e0c2287dc9534082dc90bd71313d94.gif'); /* Un gif de corazones cayendo (opcional) */
+    background-size: cover;
+    transition: all 1s ease;
+}
+
+/* --- Estilos para la pantalla de Celebración Final --- */
+
+/* Clase para las filas que contendrán 2 imágenes cada una */
+.fila-imagenes-final {
+    display: flex;
+    justify-content: center; /* Centradas horizontalmente */
+    gap: 30px; /* Espacio entre las dos imágenes */
+    margin: 20px 0; /* Espacio vertical para separarlas del texto */
+    z-index: 3000; /* Por encima de todo */
+    position: relative;
+}
+
+/* Clase para las imágenes individuales */
+.img-celebracion {
+    width: 180px;  /* Tamaño fijo para que se vean uniformes */
+    height: 180px; /* Cuadradas */
+    object-fit: cover; /* Recorta la imagen si no es cuadrada para que no se deforme */
+    border-radius: 20px; /* Bordes redondeados */
+    border: 4px solid white; /* Un marco blanco bonito */
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3); /* Sombra para dar profundidad */
+    
+    /* Una pequeña animación de entrada para que se vea pro */
+    animation: entradaTriunfal 0.8s ease-out forwards;
+    opacity: 0; /* Empiezan invisibles para la animación */
+}
+
+/* Definimos la animación */
+@keyframes entradaTriunfal {
+    from {
+        opacity: 0;
+        transform: scale(0.5) translateY(50px); /* Empiezan pequeñas y más abajo */
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0); /* Terminan en su tamaño normal y posición */
+    }
+}
